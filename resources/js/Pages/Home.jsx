@@ -99,8 +99,6 @@ plotingan
 - perusahaan_id
 - guru_id
 
-
-
 plotingan_siswa
 - plotingan_id
 - siswa_id
