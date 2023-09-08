@@ -12,6 +12,10 @@ class PlotinganSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Plotingan::create([
+            'perusahaan_id' => 1,
+            'dudi_id' => 6,
+            'guru_id' => 5
+        ]);
     }
 }

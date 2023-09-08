@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('plotingans', function (Blueprint $table) {
             $table->id();
+           
+            $table->unsignedBigInteger('perusahaan_id');
+            $table->unsignedBigInteger('dudi_id');
+            $table->unsignedBigInteger('guru_id');
+ 
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaans');
+            $table->foreign('dudi_id')->references('id')->on('users');
+            $table->foreign('guru_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
