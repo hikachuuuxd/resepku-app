@@ -96,9 +96,10 @@ update status = role dudi
 
 plotingan
 - id 
-- dudi_id
-- guru_id
 - perusahaan_id
+- guru_id
+
+
 
 plotingan_siswa
 - plotingan_id
@@ -114,8 +115,8 @@ perusahaan
 authorization route = admin
 
 perusahaan_user
-- dudi_id
 - perusahaan_id
+- dudi_id
 
 create = admin melalui request dudi_id
 

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plotingans', function (Blueprint $table) {
+        Schema::create('perusahaan_user', function (Blueprint $table) {
             $table->id();
-           
-            $table->unsignedBigInteger('perusahaan_id');
-            $table->unsignedBigInteger('guru_id');
- 
-            $table->foreign('perusahaan_id')->references('id')->on('perusahaans');
-            $table->foreign('guru_id')->references('id')->on('users');
+            $table->foreignId('perusahaan_id')->constrained();
+            $table->unsignedBigInteger('dudi_id');
+
+            $table->foreign('dudi_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plotingans');
+        Schema::dropIfExists('perusahaan_user');
     }
 };
