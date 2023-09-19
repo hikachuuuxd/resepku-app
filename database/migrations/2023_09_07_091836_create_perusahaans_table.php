@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('alamat');
             $table->text('detail');
+            $table->string('image')->nullable();
+            $table->boolean('dikonfirmasi')->default(false);
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }
