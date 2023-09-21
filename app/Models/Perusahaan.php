@@ -22,10 +22,10 @@ class Perusahaan extends Model
         return $this->belongsToMany(User::class, 'perusahaan_user', 'perusahaan_id', 'dudi_id');
     }
 
-    protected function image(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => url('assets/'.$value),
-        );
-    }
+    // protected function image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => url('/assets/perusahaan/'.$value),
+    //     );
+    // }
 }

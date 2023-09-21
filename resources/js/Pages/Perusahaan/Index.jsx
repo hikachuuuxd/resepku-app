@@ -138,13 +138,13 @@ export default function Index(props)
                                     <td className='border border-slate-300  px-4'>{perusahaan.name}</td>
                                     <td className='border border-slate-300  px-4'>{perusahaan.alamat}</td>
                                     <td className='border border-slate-300  px-4'>{perusahaan.detail}</td>
-                                    <td className='border border-slate-300  px-4'><embed src={perusahaan.image} type="application/pdf" /></td>
+                                    <td className='border border-slate-300  px-4'><embed src={perusahaan.image} type="" /></td>
                                     <td className='border border-slate-300  px-4'>prosess</td>
                                     <td className='border border-slate-300  px-4'>prosess</td>
                                     <td className='border border-slate-300  px-4'><button className='bg-yellow-400 p-2 rounded shadow'>update</button></td>
                                     <td className='border border-slate-300  px-4'>
     
-                                        <button onClick={() => hapus(perusahaan)} className='bg-red-800 text-white p-2 rounded shadow'>Hapus</button>
+                                        <button onClick={() => hapus(perusahaan.id)} className='bg-red-800 text-white p-2 rounded shadow'>Hapus</button>
                                
                                     </td>
                                 </tr>

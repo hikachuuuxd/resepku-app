@@ -45,10 +45,8 @@ class PerusahaanController extends Controller
         ])->validate();
    
   
-            
-            $filename = time().'.'.$request->file->extension();  
-                // $name = $time.$image->getClientOriginalName();
-            $request->file->move(public_path('asset'), $filename);
+            $filename = '/assets/perusahaan/'.time().'.'.$request->file->extension();  
+            $request->file->move(public_path().'/assets/perusahaan/', $filename);
     
             $perusahaan = Perusahaan::create([
                 'user_id' => Auth::id(),
@@ -57,7 +55,7 @@ class PerusahaanController extends Controller
                 'detail' => $request->detail,
                 'image' => $filename
             ]);
-            
+        dd($perusahaan->image);
            return redirect()->back()->with('message', 'Pengajuan berhasil di kirim');
 
     
@@ -91,17 +89,16 @@ class PerusahaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( Perusahaan $perusahaan)
+    public function destroy(Perusahaan $perusahaan)
     {
-      
-     if($perusahaan->image){
-        $path = public_path().$perusahaan->image;
-        if (is_file($path)) {
-            unlink($path);
-    
-        }   
-     }
-        Perusahaan::destroy($perusahaan->id);
-        return redirect()->back();
+
+        if($perusahaan->image){
+            $path = public_path().$perusahaan->image;
+            if(file_exists($path)){
+              unlink($path);
+            }
+        }
+        $perusahaan->delete();
+        
     }
 }
