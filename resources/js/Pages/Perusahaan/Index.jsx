@@ -10,14 +10,13 @@ import { router } from '@inertiajs/react';
 
 export default function Index(props)
 {
-    const { files } = usePage().props
     const { flash } = usePage().props
     let perusahaans = props.perusahaans;
-    const {data, setData, post,  delete: destroy, processing, errors, reset} = useForm({
+    const {data, setData, post,  put, delete: destroy, processing, errors, reset} = useForm({
         name: '', 
         alamat: '', 
         detail: '',
-        file: null,
+        image: null,
         dikonfirmasi: false,
         active: false,
     });
@@ -26,7 +25,7 @@ export default function Index(props)
         e.preventDefault();
 
         post(route('perusahaan.store'));
-        reset()
+      
         
     };
 
@@ -34,6 +33,14 @@ export default function Index(props)
     router.delete(`/perusahaan/${id}`)
 
    };
+
+   const konfirmasi = (id) => {
+        router.put(route('perusahaan.konfirmasi', id))
+   }
+   
+   const active = (id) => {
+        router.put(route('perusahaan.active', id))
+   }
    
     return(
 
@@ -49,7 +56,7 @@ export default function Index(props)
 
                     <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <h2>Form Pengajuan tempat Praktik Kerja Lapangan</h2>
-                        <form onSubmit={submit} enctype="multipart/form-data">
+                        <form onSubmit={submit} encType='multipart/form-data'>
                             <div>
                                 <InputLabel htmlFor="text" value="name"/>
                                 <TextInput 
@@ -92,16 +99,16 @@ export default function Index(props)
                                 <InputError message={errors.detail} className="mt-2" />
                             </div>
                             <div className='mt-4'>
-                                <InputLabel htmlFor="file" value="file"/>
+                                <InputLabel htmlFor="image" value="image"/>
                                 <TextInput 
-                                    id="file"
+                                    id="image"
                                     type="file"
-                                    name="file"
+                                    name="image"
                                     className="mt-1 block w-full"
                                     isFocused={true}
-                                    onChange={(e) => setData('file', e.target.files[0])}
+                                    onChange={(e) => setData('image', e.target.files[0])}
                                 />
-                                <InputError message={errors.file} className="mt-2" />
+                                <InputError message={errors.image} className="mt-2" />
                             </div>
                             <div className='mt-4'>
                             <PrimaryButton disabled={processing}>
@@ -139,11 +146,13 @@ export default function Index(props)
                                     <td className='border border-slate-300  px-4'>{perusahaan.alamat}</td>
                                     <td className='border border-slate-300  px-4'>{perusahaan.detail}</td>
                                     <td className='border border-slate-300  px-4'><embed src={perusahaan.image} type="" /></td>
-                                    <td className='border border-slate-300  px-4'>prosess</td>
-                                    <td className='border border-slate-300  px-4'>prosess</td>
-                                    <td className='border border-slate-300  px-4'><button className='bg-yellow-400 p-2 rounded shadow'>update</button></td>
+                                    <td className='border border-slate-300  px-4'><button onClick={() => konfirmasi(perusahaan.id)}className='bg-blue-500 p-2 rounded shadow text-white'>konfirmasi</button></td>
+                                    <td className='border border-slate-300  px-4'><button onClick={() => active(perusahaan.id)}className='bg-green-500 p-2 rounded shadow text-white'>active</button></td>
                                     <td className='border border-slate-300  px-4'>
-    
+                                        <Link href={route('perusahaan.edit', perusahaan.id)}><button className='bg-yellow-400 p-2 rounded shadow'>update</button></Link>
+                                        
+                                    </td>
+                                    <td className='border border-slate-300  px-4'>
                                         <button onClick={() => hapus(perusahaan.id)} className='bg-red-800 text-white p-2 rounded shadow'>Hapus</button>
                                
                                     </td>

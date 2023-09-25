@@ -37,16 +37,15 @@ class PerusahaanController extends Controller
     public function store(Request $request, Perusahaan $perusahaan)
     {
         Validator::make($request->all(), [
-            'name' =>  ['required'],
-            'alamat' =>  ['required'],
-            'detail' =>  ['required'],
-            'file' =>  ['required']
-            
+            'name' =>  'required',
+            'alamat' =>  'required',
+            'detail' =>  'required',
+            'image' => 'required|mimes:pdf' 
         ])->validate();
-   
-  
-            $filename = '/assets/perusahaan/'.time().'.'.$request->file->extension();  
-            $request->file->move(public_path().'/assets/perusahaan/', $filename);
+        
+            $image = $request->file('image');
+            $filename = '/assets/perusahaan/'.time().'.'.$image->extension();  
+            $image->move(public_path().'/assets/perusahaan/', $filename);
     
             $perusahaan = Perusahaan::create([
                 'user_id' => Auth::id(),
@@ -56,12 +55,12 @@ class PerusahaanController extends Controller
                 'image' => $filename
             ]);
         dd($perusahaan->image);
-           return redirect()->back()->with('message', 'Pengajuan berhasil di kirim');
-
-    
+        return redirect()->back()->with('message', 'Pengajuan berhasil di kirim');
+        
+        
         // $perusahaan->save();
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -69,21 +68,57 @@ class PerusahaanController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Perusahaan $perusahaan)
     {
-        //
+        return Inertia::render('Perusahaan/Edit', [
+            'perusahaan' => $perusahaan
+        ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Perusahaan $perusahaan)
     {
-        //
+        Validator::make($request->all(), [
+            'name' =>  ['required'],
+            'alamat' =>  ['required'],
+            'detail' =>  ['required'],
+            'image' => 'mimes:pdf'
+        
+        ])->validate();
+ 
+       
+        $image = $request->file('image');
+        if($image)
+        {
+
+            $path = public_path().$perusahaan->image;
+            if(file_exists($path)){
+              unlink($path);
+            }
+
+        $filename = '/assets/perusahaan/'.time().'.'.$image->getClientOriginalExtension();  
+        $image->move(public_path().'/assets/perusahaan/', $filename);
+
+
+        $perusahaan->update([
+                'image' => $filename
+            ]);
+        }
+        
+        $perusahaan->update([
+                'name' => $request->name,
+                'alamat' => $request->alamat,
+                'detail' => $request->detail,
+        ]);
+
+        dd($perusahaan);
+        return redirect()->route('perusahaan.index');
     }
 
     /**
@@ -100,5 +135,20 @@ class PerusahaanController extends Controller
         }
         $perusahaan->delete();
         
+    }
+
+    public function konfirmasi(Perusahaan $perusahaan)
+    {
+        $perusahaan->update([
+            'dikonfirmasi' => 1
+        ]);
+
+    }
+
+    public function active(Perusahaan $perusahaan)
+    {
+        $perusahaan->update([
+            'active' => 1
+        ]);
     }
 }
