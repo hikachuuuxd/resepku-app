@@ -30,7 +30,7 @@ export default function Edit(props)
     const update = (e) => {
         e.preventDefault();
 
-        router.post(route('perusahaan.update', perusahaan.id), {
+        router.post(route('pengajuan.update', perusahaan.id), {
             _method: 'put',
             name: data.name,
             alamat: data.alamat,

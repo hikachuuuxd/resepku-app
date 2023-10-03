@@ -24,32 +24,32 @@ export default function Index(props)
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('perusahaan.store'));
+        post(route('pengajuan.store'));
       
         
     };
 
    const hapus = (id) => {
-    router.delete(`/perusahaan/${id}`)
+    router.delete(`/pengajuan/${id}`)
 
    };
 
    const konfirmasi = (id) => {
-        router.put(route('perusahaan.konfirmasi', id))
+        router.put(route('pengajuan.konfirmasi', id))
    }
    
    const active = (id) => {
-        router.put(route('perusahaan.active', id))
+        router.put(route('pengajuan.active', id))
    }
    
     return(
 
         <AuthenticatedLayout
             user={props.auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Perusahaan</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Pengajuan tempat PKL</h2>}
         >
             
-        <Head title='perusahaan' />
+        <Head title='Pengajuan' />
 
         <div className="py-12">
                 <div className="mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -149,7 +149,7 @@ export default function Index(props)
                                     <td className='border border-slate-300  px-4'><button onClick={() => konfirmasi(perusahaan.id)}className='bg-blue-500 p-2 rounded shadow text-white'>konfirmasi</button></td>
                                     <td className='border border-slate-300  px-4'><button onClick={() => active(perusahaan.id)}className='bg-green-500 p-2 rounded shadow text-white'>active</button></td>
                                     <td className='border border-slate-300  px-4'>
-                                        <Link href={route('perusahaan.edit', perusahaan.id)}><button className='bg-yellow-400 p-2 rounded shadow'>update</button></Link>
+                                        <Link href={route('pengajuan.edit', perusahaan.id)}><button className='bg-yellow-400 p-2 rounded shadow'>update</button></Link>
                                         
                                     </td>
                                     <td className='border border-slate-300  px-4'>

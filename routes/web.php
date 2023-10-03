@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerusahaanController;
+use App\Http\Controllers\PlotinganController;
 use Inertia\Inertia;
 
 /*
@@ -34,9 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::put('/perusahaan/konfirmasi/{perusahaan}', [PerusahaanController::class, 'konfirmasi'])->name('perusahaan.konfirmasi');
-    Route::put('/perusahaan/active/{perusahaan}', [PerusahaanController::class, 'active'])->name('perusahaan.active');
-    Route::resource('/perusahaan', PerusahaanController::class)->names('perusahaan');
+    Route::put('/pengajuan/konfirmasi/{pengajuan}', [PerusahaanController::class, 'konfirmasi'])->name('pengajuan.konfirmasi');
+    Route::put('/pengajuan/active/{pengajuan}', [PerusahaanController::class, 'active'])->name('pengajuan.active');
+    Route::resource('/pengajuan', PerusahaanController::class)->names('pengajuan');
+    Route::resource('/plotingan', PlotinganController::class)->names('plotingan');
 });
 
 require __DIR__.'/auth.php';

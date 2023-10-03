@@ -58,7 +58,8 @@ export default function Authenticated({ user, header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('perusahaan.index')}>Perusahaan</Dropdown.Link>
+                                        <Dropdown.Link href={route('pengajuan.index')}>Perusahaan</Dropdown.Link>
+                                        <Dropdown.Link href={route('plotingan.index')}>Plotingan</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>

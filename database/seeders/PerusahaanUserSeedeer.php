@@ -13,7 +13,5 @@ class PerusahaanUserSeedeer extends Seeder
     public function run(): void
     {
         \App\Models\Perusahaan::find(1)->users()->attach(6);
-
-
     }
 }

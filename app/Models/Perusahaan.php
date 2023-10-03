@@ -12,14 +12,14 @@ class Perusahaan extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function siswa(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
     public function users():BelongsToMany
     {
         return $this->belongsToMany(User::class, 'perusahaan_user', 'perusahaan_id', 'dudi_id');
+    }
+
+    public function jurusans():BelongsToMany
+    {
+        return $this->belongsToMany(Jurusan::class, 'kesediaans', 'perusahaan_id', 'jurusan_id')->withPivot('total');
     }
 
     // protected function image(): Attribute

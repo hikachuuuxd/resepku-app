@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\KonfirmasiPengajuan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
-use App\Models\Perusahaan;
+use App\Models\Pengajuan;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -19,7 +20,7 @@ class PerusahaanController extends Controller
     public function index()
     {
         return Inertia::render('Perusahaan/Index', [
-            'perusahaans' => Perusahaan::with('siswa')->latest()->get()
+            'perusahaans' => Pengajuan::with('siswa')->latest()->get()
         ]);
     }
 
@@ -34,7 +35,7 @@ class PerusahaanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Perusahaan $perusahaan)
+    public function store(Request $request, Pengajuan $pengajuan)
     {
         Validator::make($request->all(), [
             'name' =>  'required',
@@ -47,14 +48,15 @@ class PerusahaanController extends Controller
             $filename = '/assets/perusahaan/'.time().'.'.$image->extension();  
             $image->move(public_path().'/assets/perusahaan/', $filename);
     
-            $perusahaan = Perusahaan::create([
+            $pengajuan = Pengajuan::create([
                 'user_id' => Auth::id(),
                 'name' => $request->name,
                 'alamat' => $request->alamat,
                 'detail' => $request->detail,
                 'image' => $filename
             ]);
-        dd($perusahaan->image);
+        dd($pengajuan->image);
+
         return redirect()->back()->with('message', 'Pengajuan berhasil di kirim');
         
         
@@ -72,17 +74,17 @@ class PerusahaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Perusahaan $perusahaan)
+    public function edit(Pengajuan $pengajuan)
     {
         return Inertia::render('Perusahaan/Edit', [
-            'perusahaan' => $perusahaan
+            'perusahaan' => $pengajuan
         ]);
     }
     
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Perusahaan $perusahaan)
+    public function update(Request $request, Pengajuan $pengajuan)
     {
         Validator::make($request->all(), [
             'name' =>  ['required'],
@@ -97,7 +99,7 @@ class PerusahaanController extends Controller
         if($image)
         {
 
-            $path = public_path().$perusahaan->image;
+            $path = public_path().$pengajuan->image;
             if(file_exists($path)){
               unlink($path);
             }
@@ -106,48 +108,50 @@ class PerusahaanController extends Controller
         $image->move(public_path().'/assets/perusahaan/', $filename);
 
 
-        $perusahaan->update([
+        $pengajuan->update([
                 'image' => $filename
             ]);
         }
         
-        $perusahaan->update([
+        $pengajuan->update([
                 'name' => $request->name,
                 'alamat' => $request->alamat,
                 'detail' => $request->detail,
         ]);
 
-        dd($perusahaan);
+        dd($pengajuan);
         return redirect()->route('perusahaan.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Perusahaan $perusahaan)
+    public function destroy(Pengajuan $pengajuan)
     {
 
-        if($perusahaan->image){
-            $path = public_path().$perusahaan->image;
+        if($pengajuan->image){
+            $path = public_path().$pengajuan->image;
             if(file_exists($path)){
               unlink($path);
             }
         }
-        $perusahaan->delete();
+        $pengajuan->delete();
         
     }
 
-    public function konfirmasi(Perusahaan $perusahaan)
+    public function konfirmasi(Pengajuan $pengajuan)
     {
-        $perusahaan->update([
+        $update = $pengajuan->update([
             'dikonfirmasi' => 1
         ]);
 
+        KonfirmasiPengajuan::dispatchIf($update, $pengajuan);
+
     }
 
-    public function active(Perusahaan $perusahaan)
+    public function active(Pengajuan $pengajuan)
     {
-        $perusahaan->update([
+        $pengajuan->update([
             'active' => 1
         ]);
     }

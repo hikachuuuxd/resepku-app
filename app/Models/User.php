@@ -43,6 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
@@ -52,4 +53,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Jurnal::class, 'jurnal_user', 'siswa_id', 'jurnal_id');
     }
+
+    public function jurusans():BelongsToMany
+    {
+        return $this->belongsToMany(Jurusan::class, 'jurusan_user', 'siswa_id', 'jurusan_id');
+    }
+
 }

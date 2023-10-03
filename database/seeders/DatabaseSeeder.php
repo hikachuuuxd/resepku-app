@@ -48,6 +48,20 @@ class DatabaseSeeder extends Seeder
       
      
 
-     
+    $jurusans =[
+        ['name' => 'Rekayasa Perangkat Lunak'],
+        ['name' => 'Teknik Komputer dan Jaringan'], 
+        ['name' => 'Multimedia'],
+        ['name' => 'Kimia Industri'],
+        ['name' => 'Kimia Analis'],
+        ['name' => 'OTKP'], 
+        ['name' => 'Bisnis Daring dan Pemasaran'],
+    ];
+
+    for($i = 0; $i < count($jurusans); $i++){
+        \App\Models\Jurusan::create($jurusans[$i]);
+    }
+
+  
     }
 }

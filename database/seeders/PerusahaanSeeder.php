@@ -14,14 +14,18 @@ class PerusahaanSeeder extends Seeder
     {
         $perusahaan = [
             [
+              
                 'name' => 'Perusahaan 1',
                 'alamat' => 'Jl perusahaan 1 Kota Perusahaan 1 Kec.Perusahaan',
-                'detail' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit quibusdam nobis quis debitis perspiciatis explicabo obcaecati voluptatem nam? Voluptate, omnis consequuntur nostrum quibusdam minima minus assumenda at quidem ratione quia!'
+                'detail' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit quibusdam nobis quis debitis perspiciatis explicabo obcaecati voluptatem nam? Voluptate, omnis consequuntur nostrum quibusdam minima minus assumenda at quidem ratione quia!',
+                'image' => '/assets/perusahaan/1696259683.pdf'
             ], 
             [
+          
                 'name' => 'Perusahaan 2',
                 'alamat' => 'Jl Perusahaan 2 Kec.Perusahaan 2 Kota Perusahaan 2', 
-                'detail' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit quibusdam nobis quis debitis perspiciatis explicabo obcaecati voluptatem nam? Voluptate, omnis consequuntur'
+                'detail' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit quibusdam nobis quis debitis perspiciatis explicabo obcaecati voluptatem nam? Voluptate, omnis consequuntur',
+                'image' => '/assets/perusahaan/1696259683.pdf'
             ]
             ];
         
