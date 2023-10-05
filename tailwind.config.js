@@ -14,7 +14,19 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                poppins: ['Poppins']
             },
+            backgroundImage: {
+                logo: "url('/assets/icons/LOGOSMK1.png')",
+            },
+            color: {
+                primary: '#6867AC',
+                secondary: '#CE7BB0'
+            },
+            boxShadow: {
+                '3xl': '0px -5px 15px -10px rgba(0, 0, 0, 0.8)',
+                'medium': '5px 0px 10px -10px rgba(0, 0, 0, 0.8)',
+              }
         },
     },
 
