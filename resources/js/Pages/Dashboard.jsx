@@ -10,11 +10,14 @@ export default function Dashboard({children, menu})
         <Head title='Jurnal PKL'/>
         <div className='w-full h-12 top-0 left-0 right-0 bg-gradient-to-r from-[#6867AC] to-[#CE7BB0] shadow-lg flex items-center z-50 fixed md:h-14'>
             <img src="/assets/icons/LOGOSMK1.png" className='bg-containt aspect-auto w-8 ms-4 md:w-10'  alt="" />
-            <h4 className='text-white px-4 md:text-xl tracking-widest '>Jurnal Skensa <span className='ms-4'>|</span>< span className='ms-2 text-sm lg:text-base'>{menu ? menu : 'Dashboard'}</span></h4>
+            <h4 className='text-white px-4 md:text-xl tracking-widest '>Jurnal Skensa 
+            <span className='ms-4 lg:ms-6'>|</span>
+            < span className='ms-2 text-xs md:text-sm lg:text-base'>{menu ? menu : 'Dashboard'}</span>
+            </h4>
         </div>
 
 
-        <main className='py-20 px-2 md:ps-20 lg:ps-72 min-w-fit min-h-screen bg-slate-200 box-border'>
+        <main className='py-20 px-2 md:ps-20 lg:ps-72 min-w-fit min-h-screen bg-slate-200 box-border text-slate-800'>
             {children}
         
         </main>
