@@ -39,6 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/pengajuan/active/{pengajuan}', [PerusahaanController::class, 'active'])->name('pengajuan.active');
     Route::resource('/pengajuan', PerusahaanController::class)->names('pengajuan');
     Route::resource('/plotingan', PlotinganController::class)->names('plotingan');
+
+    Route::get('/perusahaan', function () {
+        return Inertia::render('Pengajuan/Index');
+    })->name('perusahaan');
+    Route::get('/jurnal', function () {
+        return Inertia::render('Jurnal/Index');
+    })->name('jurnal');
 });
 
 require __DIR__.'/auth.php';
