@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PlotinganController;
 use Inertia\Inertia;
+use App\Http\Controllers\PengajuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::put('/pengajuan/konfirmasi/{pengajuan}', [PerusahaanController::class, 'konfirmasi'])->name('pengajuan.konfirmasi');
-    Route::put('/pengajuan/active/{pengajuan}', [PerusahaanController::class, 'active'])->name('pengajuan.active');
-    Route::resource('/pengajuan', PerusahaanController::class)->names('pengajuan');
+    Route::put('/pengajuan/konfirmasi/{pengajuan}', [PengajuanController::class, 'konfirmasi'])->name('pengajuan.konfirmasi');
+    // Route::put('/pengajuan/active/{pengajuan}', [PengajuanController::class, 'active'])->name('pengajuan.active');
+    Route::resource('/pengajuan', PengajuanController::class)->names('pengajuan');
     Route::resource('/plotingan', PlotinganController::class)->names('plotingan');
 
-    Route::get('/perusahaan', function () {
-        return Inertia::render('Pengajuan/Index');
-    })->name('perusahaan');
+    // Route::get('/perusahaan', function () {
+    //     return Inertia::render('Pengajuan/Index');
+    // })->name('perusahaan');
     Route::get('/jurnal', function () {
         return Inertia::render('Jurnal/Index');
     })->name('jurnal');

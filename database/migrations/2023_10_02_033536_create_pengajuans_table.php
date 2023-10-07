@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('detail');
             $table->string('image')->nullable();
             $table->boolean('dikonfirmasi')->default(false);
-            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

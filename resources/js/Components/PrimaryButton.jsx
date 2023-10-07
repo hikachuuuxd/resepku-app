@@ -1,8 +1,9 @@
-export default function PrimaryButton({ className = '', disabled, children, ...props }) {
+export default function PrimaryButton({ className = '', disabled, children, onClick, ...props}) {
     return (
         <>
         <button
             {...props}
+            onClick={onClick}
             className={
                 ` py-2 px-4 float-right my-2 text-sm lg:text-base bg-violet-200 hover:bg-primary hover:text-white rounded tracking-wide transition ease-in-out duration-150 ${
                     disabled && 'opacity-25'

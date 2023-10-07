@@ -1,120 +1,137 @@
 import Dashboard from "../Dashboard";
+import { Head, Link, useForm, usePage} from '@inertiajs/react';
 import DropdownCard from "@/Components/Originals/DropdownCard";
 import Card from "@/Components/Originals/Card";
-import { Head, Link, useForm, usePage} from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import Home from "../Home";
+import InputError from "@/Components/InputError";
+import { router } from '@inertiajs/react';
+import MappingRecord from "@/Components/Originals/MappingRecord";
+import { useState } from "react";
 
-export default function PengajuanIndex({auth})
+export default function PengajuanIndex({auth, pengajuans})
 {
-    const {data, post, error, setData} = useForm();
+    const [file, setFile] = useState(false)
+    const handleFile = handle => {
+        file ? handle = false : handle = true
+        setFile(handle)
+    } 
+    const { flash } = usePage().props
+    const {data, setData, post,  put, delete: destroy, processing, errors, reset} = useForm({
+        name: '', 
+        alamat: '', 
+        detail: '',
+        image: null,
+    })
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        post(route('pengajuan.store'));
+      
+        
+    };
+
+    const hapus = (id) => {
+        router.delete(`/pengajuan/${id}`)
+    
+       };
+    
+       const konfirmasi = (id) => {
+            router.put(route('pengajuan.konfirmasi', id))
+       }
+       
+       const active = (id) => {
+            router.put(route('pengajuan.active', id))
+       }
+       
     return(
         <Dashboard
             menu={'Pengajuan Tempat PKL'}
         >
 
-    <DropdownCard title={'Form Pengajuan Tempat PKL'}>
-                
-        <div className="flex-column pt-8 pb-4">
-        <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
-            id="name"
-            type="text"
-            value={data.name}
-            name="name"
-            className="mt-1 block w-full"
-            isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
-        </div>
-        <div className="flex-column py-4">
-        <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
-            id="name"
-            type="text"
-            value={data.name}
-            name="name"
-            className="mt-1 block w-full"
-            isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
-        </div>
-        <div className="flex-column py-4">
-        <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
-            id="name"
-            type="text"
-            value={data.name}
-            name="name"
-            className="mt-1 block w-full"
-            isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
-        </div>
-        
-        <PrimaryButton>Submit</PrimaryButton>
-        </DropdownCard>
+        <Head title="Perusahaan" />
 
     <DropdownCard title={'Form Pengajuan Tempat PKL'}>
-                
+    <form onSubmit={submit} encType='multipart/form-data'> 
         <div className="flex-column pt-8 pb-4">
         <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
+            <TextInput 
             id="name"
             type="text"
             value={data.name}
             name="name"
             className="mt-1 block w-full"
             isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
+            onChange={(e) => setData('name', e.target.value)}                    
+            />
+        <InputError message={errors.name} className="mt-2" />
         </div>
+        <InputLabel htmlFor="text" value="alamat"/>
+            <TextInput 
+            id="alamat"
+            type="text"
+            value={data.alamat}
+            name="alamat"
+            className="mt-1 block w-full"
+            isFocused={true}
+            onChange={(e) => setData('alamat', e.target.value)}
+            />
+        <InputError message={errors.alamat} className="mt-2" />
+
         <div className="flex-column py-4">
-        <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
-            id="name"
+        <InputLabel htmlFor="text" value="detail"/>
+            <TextInput 
+            id="detail"
             type="text"
-            value={data.name}
-            name="name"
+            value={data.detail}
+            name="detail"
             className="mt-1 block w-full"
             isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
+            onChange={(e) => setData('detail', e.target.value)}
+            />
+        <InputError message={errors.detail} className="mt-2" />
+
         </div>
-        <div className="flex-column py-4">
-        <InputLabel htmlFor="text" value="name"/>
-        <TextInput 
-            id="name"
-            type="text"
-            value={data.name}
-            name="name"
+        <InputLabel htmlFor="image" value="image"/>
+            <TextInput 
+            id="image"
+            type="file"
+            name="image"
             className="mt-1 block w-full"
             isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
-                                    
-        />
-        </div>
+            onChange={(e) => setData('image', e.target.files[0])}
+            />
+        <InputError message={errors.image} className="mt-2" />
         
-        <PrimaryButton>Submit</PrimaryButton>
-        </DropdownCard>
+        <PrimaryButton disabled={processing}>
+            Submit
+        </PrimaryButton>
+    
+    </form>
+    </DropdownCard>
+    
+    {
+     pengajuans.map((pengajuan, index) =>
+        
+       <MappingRecord key={index}>
+        <Card title={pengajuan.name}>
+        <div className="my-2 break-all "><span className="font-bold">Alamat :</span>{pengajuan.alamat}</div>
+        <div className="my-2"> <span className="font-bold">Kontak :</span>{pengajuan.detail}</div>
 
-        <Card title="Nama Perusahaan">
-        <div className="my-2 break-all "><span className="font-bold">Alamat :</span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit ut ad nulla quia, eum accusantium similique voluptatem, ratione quod deleniti modi itaque tenetur? Quidem aliquam quas repudiandae quam aliquid eius accusantium cumque maiores! Magnam nisi, veritatis excepturi quaerat expedita obcaecati!</div>
-            <div className="my-2"> <span className="font-bold">Kontak :</span> 00000000000000</div>
-
-        <PrimaryButton>Lihat Bukti</PrimaryButton>
+        <PrimaryButton onClick={handleFile}>Lihat Bukti</PrimaryButton>
         </Card>
+        
+        <iframe src={pengajuan.image} className={!file ? "hidden" : "min-w-full max-w-fit h-screen"}></iframe>
+        
+       </MappingRecord>
+        
+    )   
+    }
 
 
 
-        </Dashboard>
+</Dashboard>
     )
 }

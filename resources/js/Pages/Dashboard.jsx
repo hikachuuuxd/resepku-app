@@ -17,7 +17,7 @@ export default function Dashboard({children, menu})
         </div>
 
 
-        <main className='py-20 px-2 md:ps-20 lg:ps-72 min-w-fit min-h-screen bg-slate-200 box-border text-slate-800'>
+        <main className='py-20 px-2 md:ps-20 lg:ps-72 min-w-fit min-h-screen bg-slate-100 box-border text-slate-800'>
             {children}
         
         </main>
@@ -30,7 +30,7 @@ export default function Dashboard({children, menu})
             </button>
         </NavLink>
 
-        <NavLink href={route('perusahaan')} active={route().current('perusahaan')}  >
+        <NavLink href={route('pengajuan.index')} active={route().current('pengajuan.index')}  >
             <button className='inline md:block  md:py-1  md:my-10 lg:flex  lg:ms-8 '>
             <img src="/assets/icons/architecture.png" alt="" className='w-7 h-7 md:ms-4 lg:w-8 lg:h-8 lg:mx-2' />
             <p className='hidden lg:block lg:mx-2 lg:text-lg'>Perusahaan</p>
