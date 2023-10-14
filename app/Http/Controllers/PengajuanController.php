@@ -51,7 +51,7 @@ class PengajuanController extends Controller
                 'name' => $request->name,
                 'alamat' => $request->alamat,
                 'detail' => $request->detail,
-                'image' => $filename
+                'image' => $filename,
             ]);
         dd($pengajuan->image);
 

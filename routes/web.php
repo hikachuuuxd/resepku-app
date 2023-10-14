@@ -7,6 +7,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PlotinganController;
 use Inertia\Inertia;
 use App\Http\Controllers\PengajuanController;
+use App\Models\Perusahaan;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/pengajuan/konfirmasi/{pengajuan}', [PengajuanController::class, 'konfirmasi'])->name('pengajuan.konfirmasi');
     // Route::put('/pengajuan/active/{pengajuan}', [PengajuanController::class, 'active'])->name('pengajuan.active');
     Route::resource('/pengajuan', PengajuanController::class)->names('pengajuan');
+    Route::get('/perusahaan/kesediaan/{perusahaan}/create', [PerusahaanController::class, 'createKesediaan'])->name('perusahaan.create.kesediaan');
+    Route::put('/perusahaan/kesediaan/{perusahaan}', [PerusahaanController::class, 'storeKesediaan'])->name('perusahaan.store.kesediaan');
+    Route::resource('/perusahaan', PerusahaanController::class)->names('perusahaan');
     Route::resource('/plotingan', PlotinganController::class)->names('plotingan');
 
     // Route::get('/perusahaan', function () {

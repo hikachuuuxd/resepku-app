@@ -9,6 +9,9 @@ import InputError from "@/Components/InputError";
 import { router } from '@inertiajs/react';
 import MappingRecord from "@/Components/Originals/MappingRecord";
 import { useState } from "react";
+import ItemMenu from "@/Components/Originals/ItemMenu";
+import CardHead from "@/Components/Originals/CardHead";
+import CardChild from "@/Components/Originals/CardChild";
 
 export default function PengajuanIndex({auth, pengajuans})
 {
@@ -62,19 +65,18 @@ export default function PengajuanIndex({auth, pengajuans})
             type="text"
             value={data.name}
             name="name"
-            className="mt-1 block w-full"
             isFocused={true}
             onChange={(e) => setData('name', e.target.value)}                    
             />
         <InputError message={errors.name} className="mt-2" />
         </div>
+        
         <InputLabel htmlFor="text" value="alamat"/>
             <TextInput 
             id="alamat"
             type="text"
             value={data.alamat}
             name="alamat"
-            className="mt-1 block w-full"
             isFocused={true}
             onChange={(e) => setData('alamat', e.target.value)}
             />
@@ -87,7 +89,6 @@ export default function PengajuanIndex({auth, pengajuans})
             type="text"
             value={data.detail}
             name="detail"
-            className="mt-1 block w-full"
             isFocused={true}
             onChange={(e) => setData('detail', e.target.value)}
             />
@@ -99,7 +100,6 @@ export default function PengajuanIndex({auth, pengajuans})
             id="image"
             type="file"
             name="image"
-            className="mt-1 block w-full"
             isFocused={true}
             onChange={(e) => setData('image', e.target.files[0])}
             />
@@ -114,17 +114,22 @@ export default function PengajuanIndex({auth, pengajuans})
     
     {
      pengajuans.map((pengajuan, index) =>
-        
+
        <MappingRecord key={index}>
-        <Card title={pengajuan.name}>
+        <Card >
+        <CardHead title={pengajuan.name}>
+            <ItemMenu className='border-b border-slate-400 hover:border-primary'> Edit</ItemMenu>
+            <ItemMenu onClick={() => hapus(pengajuan.id)} className='border-b border-slate-400 hover:border-primary'>Delete</ItemMenu>
+            <ItemMenu onClick={() => konfirmasi(pengajuan.id)}>Konfirmasi</ItemMenu>
+        </CardHead>
+        <CardChild>
         <div className="my-2 break-all "><span className="font-bold">Alamat :</span>{pengajuan.alamat}</div>
         <div className="my-2"> <span className="font-bold">Kontak :</span>{pengajuan.detail}</div>
 
         <PrimaryButton onClick={handleFile}>Lihat Bukti</PrimaryButton>
+        </CardChild>
         </Card>
-        
         <iframe src={pengajuan.image} className={!file ? "hidden" : "min-w-full max-w-fit h-screen"}></iframe>
-        
        </MappingRecord>
         
     )   
