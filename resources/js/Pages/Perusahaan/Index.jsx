@@ -12,10 +12,6 @@ import { router } from "@inertiajs/react";
 export default function Index ({perusahaans})
 {
     const [file, setFile] = useState(false)
-    const handleFile = handle => {
-        file ? handle = false : handle = true
-        setFile(handle)
-    } 
 
     const storeKesediaan = (id) => {
         router.get(route('perusahaan.create.kesediaan', id))
@@ -37,11 +33,11 @@ export default function Index ({perusahaans})
         <div className="my-2 break-all "><span className="font-bold">Alamat :</span>{perusahaan.alamat}</div>
         <div className="my-2"> <span className="font-bold">Kontak :</span>{perusahaan.detail}</div>
 
-        <PrimaryButton onClick={handleFile}>Lihat Bukti</PrimaryButton>
+        <PrimaryButton onClick={() => setFile(!file)}>Lihat Bukti</PrimaryButton>
         </CardChild>
         </Card>
         
-        <iframe src={perusahaan.image} className={!file ? "hidden" : "min-w-full max-w-fit h-screen"}></iframe>
+        {file && (<iframe src={perusahaan.image} className={"min-w-full max-w-fit h-screen"}></iframe>)}
         
        </MappingRecord>
         
