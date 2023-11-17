@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -44,19 +44,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles(): BelongsToMany
+    public function reseps(): HasMany
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+        return $this->hasMany(Resep::class);
     }
-
-    public function jurnals() :BelongsToMany 
-    {
-        return $this->belongsToMany(Jurnal::class, 'jurnal_user', 'siswa_id', 'jurnal_id');
-    }
-
-    public function jurusans():BelongsToMany
-    {
-        return $this->belongsToMany(Jurusan::class, 'jurusan_user', 'siswa_id', 'jurusan_id');
-    }
-
 }

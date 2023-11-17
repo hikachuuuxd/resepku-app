@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
     {
 
         $users = [
-            'Siswa1',
-            'Siswa2',
-            'Siswa3',
-            'Siswa4',
-            'Guru',
-            'Dudi', 
-            'Admin'
+            'userSatu',
+            'userDua',
+            'userTiga',
+            'userEmpat',
+            'userLima',
+            'userEnam', 
+            'userTujuh'
         ];
 
         
@@ -32,36 +32,8 @@ class DatabaseSeeder extends Seeder
                 'email' => strtolower($users[$x])."@example.com",
             ]);
         }
-
-
-        $roles = [
-            ['name' => 'Admin'],
-            ['name' => 'Siswa'],
-            ['name' => 'Guru'],
-            ['name' => 'Dudi'],
-             
-        ];
-      
-        for($i = 0; $i < count($roles); $i++){
-            \App\Models\Role::create($roles[$i]);
-        }
-      
-     
-
-    $jurusans =[
-        ['name' => 'Rekayasa Perangkat Lunak'],
-        ['name' => 'Teknik Komputer dan Jaringan'], 
-        ['name' => 'Multimedia'],
-        ['name' => 'Kimia Industri'],
-        ['name' => 'Kimia Analis'],
-        ['name' => 'OTKP'], 
-        ['name' => 'Bisnis Daring dan Pemasaran'],
-    ];
-
-    for($i = 0; $i < count($jurusans); $i++){
-        \App\Models\Jurusan::create($jurusans[$i]);
-    }
-
   
     }
+
+    
 }
