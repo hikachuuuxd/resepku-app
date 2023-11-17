@@ -1,5 +1,6 @@
 # resepku-app
-web add resep
+web app resep
+
 please clone in master branch
 git clone -b master <remote_repository>
 
