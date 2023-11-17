@@ -9,6 +9,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\ResepController;
 use App\Models\Perusahaan;
+use App\Models\Resep;
+use App\Models\Like;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +29,12 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'reseps' => Resep::latest()->get(),
+        'likes' => Like::get()
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('/dashboard', ResepController::class)->middleware(['auth', 'verified'])->names('resep');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
    
 
-    Route::resource('/resepku', ResepController::class)->names('resep');
+ 
 });
 
 require __DIR__.'/auth.php';

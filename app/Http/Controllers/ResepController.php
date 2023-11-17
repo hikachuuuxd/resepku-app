@@ -71,9 +71,12 @@ class ResepController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Resep $resep)
+    public function show($id)
     {
-        //
+        $resep = Resep::findOrFail($id);
+        $bahans = Bahan::where('resep_id', $id)->get();
+        $langkah = Langkah::where('resep_id', $id)->get();
+        return Inertia::render('Resep/Show', compact('resep', 'bahans', 'langkah'));
     }
 
     /**

@@ -32,6 +32,13 @@ class DatabaseSeeder extends Seeder
                 'email' => strtolower($users[$x])."@example.com",
             ]);
         }
+
+
+        $this->call([
+            ResepSeeder::class,
+            LikeSeeder::class,
+            ItemSeeder::class,
+        ]);
   
     }
 

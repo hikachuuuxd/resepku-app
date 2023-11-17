@@ -20,7 +20,7 @@ class ResepSeeder extends Seeder
             'user_id' => $i,
             'title' => 'Judul Resep',
             'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus aliquam qui eveniet non eos blanditiis nam veritatis modi facilis explicabo?',
-            'image' => 'assets/sate.jpeg',
+            'image' => '/assets/sate.jpeg',
         ]);
        }
     }

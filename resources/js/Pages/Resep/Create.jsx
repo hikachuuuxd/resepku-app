@@ -34,7 +34,7 @@ export default function Create(){
         <Layout >
       <form onSubmit={handleSubmit}>
 
-        <div className="grid grid-flow-row gap-4 mx-0 px-4 overflow-x-hidden lg:mx-40">
+        <div className="grid grid-flow-row gap-4 mx-0 px-0 md:px-4 overflow-x-scroll lg:mx-40 ">
                 <div className="grid grid-flow-row gap-2">
                     <span className="text-cyan-900 font-semibold">Tulis Resepmu...</span>
                     <div className="flex flex-col gap-2">
