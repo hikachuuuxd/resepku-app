@@ -6,6 +6,7 @@ export default function Navbar(){
             <div className='flex gap-x-4 text-sm'>
                
             <Link href='/dashboard/create'>tulis resep</Link>
+         
             <Link href={route('logout')} method="post" as="button">logout</Link>
                
             </div>

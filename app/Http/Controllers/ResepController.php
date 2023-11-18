@@ -18,10 +18,10 @@ class ResepController extends Controller
      */
     public function index(Resep $resep)
     {
-
         return Inertia::render('Resep/Index', [
             'reseps' => $resep->latest()->where('user_id', Auth::id())->get(),
             'likes' => Like::get()
+
         ]);
     }
 
@@ -101,5 +101,18 @@ class ResepController extends Controller
     public function destroy(Resep $resep)
     {
         //
+    }
+
+    public function like(Request $request){
+        $like = $request->status;
+        $resepId = $request->resepId;
+  
+        if($like){
+            Resep::find($resepId)->likes()->attach(Auth::id());
+        }else{
+            Resep::find($resepId)->likes()->detach(Auth::id());
+        }
+
+        return back();
     }
 }
