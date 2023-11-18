@@ -1,7 +1,7 @@
 import Suka from "@/Components/Button";
 import Resep from "@/Components/Resep"
 import Layout from "@/Layouts/AuthLayout"
-import { router } from "@inertiajs/react";  
+import { Link, router } from "@inertiajs/react";  
 export default function Index ({reseps, likes, auth}){
 
     const detail = (id) => {
@@ -30,9 +30,9 @@ export default function Index ({reseps, likes, auth}){
         <Layout>
         <div className="flex flex-col place-content-center gap-4">
 
-            <div>Resep Terbaru</div>
+            <div>Resep Saya</div>
             <div className="flex flex-wrap justify-start items-start">
-                {listresep}
+                {listresep.length == 0 ? <Link href="/dashboard/create" className="text-sm text-slate-700 capitalize cursor-pointer">Tulis resep</Link> : listresep}
             </div>
         </div>
         </Layout>

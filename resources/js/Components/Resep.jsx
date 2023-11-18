@@ -5,7 +5,7 @@ export default function Resep({image, suka, title, description, children, ...pro
             <img src={image} width={1000} height={1000} className="object-cover aspect-[4/3]" />
             </div>
             <div className="text-slate-500 text-sm">{suka} {' '} orang menyukai ini</div>
-            <div className="text-cyan-800 capitalize tracking-wide">{title}</div>
+            <div className="text-cyan-900 capitalize tracking-wide">{title}</div>
             <div className="text-slate-950 text-sm word line-clamp-3" >{description}</div>
             {children}
         </div>

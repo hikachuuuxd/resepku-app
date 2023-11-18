@@ -12,8 +12,8 @@ const setLike = () => {
 
 const bStatus = like.filter(el => el.user_id == auth.user.id )
         let btitle = 'suka'
-        const disukai = 'px-4 my-2 py-2 w-full bg-slate-800 rounded text-white hover:text-black hover:bg-slate-300'
-        const suka = 'px-4 my-2 py-2 w-full bg-slate-300 rounded text-black hover:text-white hover:bg-slate-800'
+        const disukai = 'px-4 my-2 py-2 w-full bg-cyan-800 rounded text-white hover:text-black hover:bg-slate-300'
+        const suka = 'px-4 my-2 py-2 w-full bg-slate-300 rounded text-black hover:text-white hover:bg-cyan-800'
         bStatus.map(el => el.user_id == auth.user.id ? btitle = 'disukai' : btitle )
         const handleLike = (e) => {
             e.preventDefault()

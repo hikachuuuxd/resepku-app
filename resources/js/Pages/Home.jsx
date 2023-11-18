@@ -22,7 +22,7 @@ export default function Home({reseps, likes, auth}){
            title={data.title}
            description={data.description}
        >
-        <Suka data={data} likes={likes} auth={auth}/>
+        {auth.user ? <Suka data={data} likes={likes} auth={auth}/> : ''}
        </Resep>
         )
     }
